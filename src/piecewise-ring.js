@@ -27,6 +27,10 @@ PiecewiseRing.prototype.initializeRingSegments = function () {
     segment.position.y = coords.y
     return segment
   })
+
+  this.segments.forEach(function (segment, i) {
+    segment.rotation.z = thetaArray[i]
+  })
 }
 
 module.exports = PiecewiseRing
