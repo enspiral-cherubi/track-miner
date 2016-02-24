@@ -1,6 +1,7 @@
 var THREE = require('three')
 var WindowResize = require('three-window-resize')
 var OrbitControls = require('three-orbit-controls')(THREE)
+var PiecewiseRing = require('./piecewise-ring')
 
 module.exports = {
   scene: new THREE.Scene(),
@@ -13,9 +14,7 @@ module.exports = {
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     document.body.appendChild(this.renderer.domElement)
 
-    var geometry = new THREE.TorusGeometry(10, 0.5, 30, 200, 6.3)
-    var material = new THREE.MeshBasicMaterial({color: 0x000000})
-    var ring = new THREE.Mesh(geometry, material)
+    var ring = PiecewiseRing()
     this.scene.add(ring)
 
     this.camera.position.z = 20
