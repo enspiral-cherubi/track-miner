@@ -20,4 +20,8 @@ PiecewiseRing.prototype.initializeRingSegments = function () {
   })
 }
 
+PiecewiseRing.prototype.updateSegments = function (frequencyArray) {
+
+}
+
 module.exports = PiecewiseRing

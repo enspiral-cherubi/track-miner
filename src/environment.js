@@ -16,8 +16,6 @@ module.exports = {
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     document.body.appendChild(this.renderer.domElement)
 
-    this.addRingToScene()
-
     this.camera.position.z = 50
   },
 

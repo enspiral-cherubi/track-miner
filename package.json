@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/data-doge/track-miner",
   "dependencies": {
+    "jquery": "^2.2.1",
     "lodash.range": "^3.1.2",
     "three": "^0.74.0",
     "three-orbit-controls": "^72.0.0",
