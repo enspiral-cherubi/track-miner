@@ -1,6 +1,5 @@
 ### milestones
 
-- black ring rendering in a 3D landscape
 - can type in soundcloud url, and track starts playing
 - black ring responds to audio
 
