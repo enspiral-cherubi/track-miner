@@ -6,4 +6,4 @@ environment.startAnimation()
 environment.addRingToScene()
 
 var analyser = new SpectrumAnalyser()
-analyser.setupWith('https://soundcloud.com/djlongdicks/alchemy')
+analyser.start('https://soundcloud.com/djlongdicks/alchemy')
