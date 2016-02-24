@@ -2,7 +2,7 @@ var $ = require('jquery')
 var clientID = process.env.CLIENT_ID
 
 function SpectrumAnalyser () {
-  this.numOfFrequencyBands = 512;
+  this.numOfFrequencyBands = 128;
   this.context = new AudioContext();
   this.frequencyData = new Uint8Array(this.numOfFrequencyBands);
   this.output = this.context.destination;
@@ -27,6 +27,11 @@ SpectrumAnalyser.prototype.setupAudio = function (streamUrl) {
   this.source.connect(this.analyser);
   this.analyser.connect(this.output);
   this.audio.play()
+}
+
+SpectrumAnalyser.prototype.getFrequencyData = function () {
+  this.analyser.getByteFrequencyData(this.frequencyData)
+  return this.frequencyData
 }
 
 module.exports = SpectrumAnalyser
