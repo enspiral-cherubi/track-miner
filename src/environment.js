@@ -31,9 +31,7 @@ module.exports = {
 
   addRingToScene: function () {
     var self = this
-    var ring = new PiecewiseRing({centerX: 0, centerY: 0, radius: 40, numSegments: 100})
-    ring.segments.forEach(function (segment, i) {
-      self.scene.add(segment)
-    })
+    var ring = new PiecewiseRing({ x0: 0, y0: 0, r: 40, numSegments: 100 })
+    ring.segments.forEach(function (segment, i) { self.scene.add(segment) })
   }
 }

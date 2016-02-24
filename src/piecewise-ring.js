@@ -8,28 +8,15 @@ var PiecewiseRing = function (props) {
 }
 
 PiecewiseRing.prototype.initializeRingSegments = function () {
-  var centerX = this.props.centerX
-  var centerY = this.props.centerY
-  var radius = this.props.radius
-  var numSegments = this.props.numSegments
-
-  var thetaArray = range(0, Math.PI * 2, (Math.PI * 2) / numSegments)
-  var coordsArray = thetaArray.map(function (theta) {
-    return {
-      x: centerX + radius * Math.cos(theta),
-      y: centerY + radius * Math.sin(theta)
-    }
-  })
-
-  this.segments = coordsArray.map(function (coords) {
-    var segment = RingSegment()
-    segment.position.x = coords.x
-    segment.position.y = coords.y
-    return segment
-  })
-
-  this.segments.forEach(function (segment, i) {
-    segment.rotation.z = thetaArray[i]
+  var self = this
+  var thetaArray = range(0, Math.PI * 2, (Math.PI * 2) / this.props.numSegments)
+  this.segments = thetaArray.map(function (theta) {
+    return RingSegment({
+      x0: self.props.x0,
+      y0: self.props.y0,
+      r: self.props.r,
+      theta: theta
+    })
   })
 }
 
