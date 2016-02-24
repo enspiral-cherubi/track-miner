@@ -2,7 +2,7 @@
   "name": "track-miner",
   "version": "1.0.0",
   "description": "fkn high as fk lol",
-  "main": "index.js",
+  "main": "./src/index.js",
   "scripts": {
     "start": "budo . -d --serve bundle.js --live",
     "build": "browserify . -o bundle.js -g uglifyify",
@@ -12,7 +12,9 @@
     "deploy": "npm run build && npm run dist && npm run push"
   },
   "browserify": {
-    "transform": []
+    "transform": [
+      "envify"
+    ]
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,8 @@
   },
   "homepage": "https://github.com/data-doge/track-miner",
   "dependencies": {
+    "jquery": "^2.2.1",
+    "lodash.range": "^3.1.2",
     "three": "^0.74.0",
     "three-orbit-controls": "^72.0.0",
     "three-window-resize": "^1.0.4"
@@ -32,6 +36,7 @@
   "devDependencies": {
     "browserify": "^10.0.0",
     "budo": "^4.0.0",
+    "envify": "^3.4.0",
     "gh-pages": "^0.3.0",
     "smokestack": "^3.3.0",
     "tap-spec": "^4.0.2",
