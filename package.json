@@ -24,7 +24,9 @@
     "url": "https://github.com/data-doge/track-miner/issues"
   },
   "homepage": "https://github.com/data-doge/track-miner",
-  "dependencies": {},
+  "dependencies": {
+    "three": "^0.74.0"
+  },
   "devDependencies": {
     "browserify": "^10.0.0",
     "budo": "^4.0.0",
