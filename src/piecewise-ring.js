@@ -15,6 +15,7 @@ PiecewiseRing.prototype.initializeRingSegments = function () {
       x0: self.props.x0,
       y0: self.props.y0,
       r: self.props.r,
+      z: self.props.z,
       theta: theta
     })
   })
