@@ -1,9 +1,12 @@
 var environment = require('./environment')
 var SpectrumAnalyser = require('./spectrum-analyser')
 
+var url = 'https://soundcloud.com/k2kokay/k2k-x-silkersoft-syke'
+
 var analyser = new SpectrumAnalyser()
-analyser.start('https://soundcloud.com/delicieuse-musique/premiere-apes-vanilla-ice?in=churchuk/sets/volumes-001')
+analyser.start(url)
 
 environment.init(analyser)
 environment.startAnimation()
 environment.addRingToScene()
+// analyser.mute()

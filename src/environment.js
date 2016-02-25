@@ -8,7 +8,7 @@ module.exports = {
   scene: new THREE.Scene(),
   camera: new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000),
   renderer: new THREE.WebGLRenderer({alpha: true}),
-  ring: new PiecewiseRing({ x0: 0, y0: 0, r: 40, numSegments: 128 }),
+  ring: new PiecewiseRing({ x0: 0, y0: 0, r: 60, numSegments: 51}),
 
   init: function (analyser) {
     this.analyser = analyser
@@ -39,7 +39,7 @@ module.exports = {
   updateRingWithFrequencyData: function () {
     var frequencyData = this.analyser.getFrequencyData()
     this.ring.segments.forEach(function (segment, i) {
-      segment.scale.x = frequencyData[i] / 10
+      segment.scale.x = frequencyData[i] / 7 + 1
     })
   }
 }
