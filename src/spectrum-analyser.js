@@ -1,8 +1,12 @@
 var $ = require('jquery')
 var clientID = process.env.CLIENT_ID
+var range = require('lodash.range')
+var splitArray = require('./split-array')
+var avg = require('./avg')
+var flatten = require('lodash.flatten')
 
 function SpectrumAnalyser () {
-  this.numOfFrequencyBands = 128;
+  this.numOfFrequencyBands = 1024;
   this.context = new AudioContext();
   this.gainNode = this.context.createGain()
   this.frequencyData = new Uint8Array(this.numOfFrequencyBands);
@@ -36,8 +40,38 @@ SpectrumAnalyser.prototype.mute = function () {
 }
 
 SpectrumAnalyser.prototype.getFrequencyData = function () {
+  var self = this
+
   this.analyser.getByteFrequencyData(this.frequencyData)
-  return this.frequencyData
+
+  var logSubsectionSlicePoints = [
+    {x0:   0, x1:    7},
+    {x0:   7, x1:   18},
+    {x0:  18, x1:   48},
+    {x0:  48, x1:  125},
+    {x0: 125, x1:  331},
+    {x0: 331, x1:  871},
+    {x0: 871, x1: 1023}
+  ]
+
+  var logSubsections = logSubsectionSlicePoints.map(function (point) {
+    return self.frequencyData.slice(point.x0, point.x1)
+  })
+
+  var slicedLogSubsections = logSubsections.map(function (subsection) {
+    var stepSize = Math.floor(subsection.length / 7)
+    return splitArray(subsection, stepSize)
+  })
+
+  var averages = flatten(slicedLogSubsections.map(function (slicedSection) {
+    return slicedSection.map(function (section) {
+      return avg(section) + 1
+    })
+  }))
+
+
+
+  return averages.slice(0, -6)
 }
 
 module.exports = SpectrumAnalyser

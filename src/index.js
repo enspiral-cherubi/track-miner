@@ -7,4 +7,4 @@ analyser.start('https://soundcloud.com/delicieuse-musique/premiere-apes-vanilla-
 environment.init(analyser)
 environment.startAnimation()
 environment.addRingToScene()
-analyser.mute()
+// analyser.mute()
