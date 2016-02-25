@@ -4,6 +4,7 @@ var clientID = process.env.CLIENT_ID
 function SpectrumAnalyser () {
   this.numOfFrequencyBands = 128;
   this.context = new AudioContext();
+  this.gainNode = this.context.createGain()
   this.frequencyData = new Uint8Array(this.numOfFrequencyBands);
   this.output = this.context.destination;
 }
@@ -25,8 +26,13 @@ SpectrumAnalyser.prototype.setupAudio = function (streamUrl) {
   this.analyser = this.context.createAnalyser();
   this.analyser.fftSize = this.numOfFrequencyBands * 2;
   this.source.connect(this.analyser);
-  this.analyser.connect(this.output);
+  this.analyser.connect(this.gainNode);
+  this.gainNode.connect(this.output);
   this.audio.play()
+}
+
+SpectrumAnalyser.prototype.mute = function () {
+  this.gainNode.gain.value = 0
 }
 
 SpectrumAnalyser.prototype.getFrequencyData = function () {
