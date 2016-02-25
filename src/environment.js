@@ -20,6 +20,8 @@ module.exports = {
     document.body.appendChild(this.renderer.domElement)
 
     this.controls = new THREE.FlyControls(this.camera, document.body)
+    this.controls.dragToLook = true
+    this.controls.autoForward = true
 
     this.camera.position.z = 10000
   },
