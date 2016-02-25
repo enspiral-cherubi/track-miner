@@ -39,7 +39,7 @@ module.exports = {
   updateRingWithFrequencyData: function () {
     var frequencyData = this.analyser.getFrequencyData()
     this.ring.segments.forEach(function (segment, i) {
-      segment.scale.x = frequencyData[i] / 7
+      segment.scale.x = frequencyData[i] / 7 + 1
     })
   }
 }

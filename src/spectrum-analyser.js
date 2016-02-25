@@ -58,18 +58,10 @@ SpectrumAnalyser.prototype.getFrequencyData = function () {
     return self.frequencyData.slice(point.x0, point.x1)
   })
 
-  var slicedLogSubsections = logSubsections.map(function (subsection) {
+  var averages = flatten(logSubsections.map(function (subsection) {
     var stepSize = Math.floor(subsection.length / 7)
-    return splitArray(subsection, stepSize)
-  })
-
-  var averages = flatten(slicedLogSubsections.map(function (slicedSection) {
-    return slicedSection.map(function (section) {
-      return avg(section) + 1
-    })
+    return splitArray(subsection, stepSize).map(avg)
   }))
-
-
 
   return averages.slice(0, -6)
 }
