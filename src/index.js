@@ -8,5 +8,5 @@ analyser.start(url)
 
 environment.init(analyser)
 environment.startAnimation()
-environment.addRingToScene()
+environment.addRingsToScene(100)
 // analyser.mute()
