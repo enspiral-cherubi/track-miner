@@ -23,7 +23,7 @@ module.exports = {
     this.controls.dragToLook = true
     this.controls.autoForward = true
 
-    this.camera.position.z = 10000
+    this.camera.position.z = 5000
   },
 
   startAnimation: function () {
@@ -46,7 +46,7 @@ module.exports = {
 
   addRingsToScene: function (num) {
     this.rings = range(num).map(function (z) {
-      return new PiecewiseRing({ x0: 0, y0: 0, r: 100, numSegments: 51, z: z * 100})
+      return new PiecewiseRing({ x0: 0, y0: 0, r: 200, numSegments: 51, z: z * 50})
     })
     this.rings.forEach(this.addRingToScene.bind(this))
   },
@@ -62,7 +62,7 @@ module.exports = {
     var frequencyData = this.analyser.getFrequencyData()
     this.rings.forEach(function (ring) {
       ring.segments.forEach(function (segment, i) {
-        segment.scale.x = frequencyData[i] / 7 + 1
+        segment.scale.x = frequencyData[i] + 1
         // segment.scale.z = frequencyData[i] / 20 + 1
       })
     })
