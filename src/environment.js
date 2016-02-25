@@ -7,7 +7,7 @@ var range = require('lodash.range')
 
 module.exports = {
   scene: new THREE.Scene(),
-  camera: new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000),
+  camera: new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000),
   renderer: new THREE.WebGLRenderer({alpha: true}),
 
   init: function (analyser) {
@@ -22,6 +22,8 @@ module.exports = {
     this.controls = new THREE.FlyControls(this.camera, document.body)
     this.controls.dragToLook = true
     this.controls.autoForward = true
+    this.controls.movementSpeed = 0.4
+  	this.controls.rollSpeed = 0.001
 
     this.camera.position.z = 5000
   },
@@ -63,7 +65,6 @@ module.exports = {
     this.rings.forEach(function (ring) {
       ring.segments.forEach(function (segment, i) {
         segment.scale.x = frequencyData[i] + 1
-        // segment.scale.z = frequencyData[i] / 20 + 1
       })
     })
   }
