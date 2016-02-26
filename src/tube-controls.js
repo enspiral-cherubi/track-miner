@@ -136,7 +136,7 @@ module.exports = function(THREE) {
 
             this.rotationVector.x = ( -this.moveState.pitchDown + this.moveState.pitchUp );
             this.rotationVector.y = ( -this.moveState.yawRight  + this.moveState.yawLeft );
-            this.rotationVector.z = ( -this.moveState.rollRight + 1 );
+            this.rotationVector.z = ( -this.moveState.rollRight + this.moveState.rollLeft );
 
         };
 
