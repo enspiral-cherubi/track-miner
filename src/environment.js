@@ -4,6 +4,7 @@ var OrbitControls = require('three-orbit-controls')(THREE)
 var TubeControls = require('./tube-controls')(THREE)
 var PiecewiseRing = require('./piecewise-ring')
 var range = require('lodash.range')
+var $ = require('jquery')
 
 module.exports = {
   scene: new THREE.Scene(),
@@ -40,8 +41,9 @@ module.exports = {
 
       var x = parseInt(self.controls.object.position.x)
       var y = parseInt(self.controls.object.position.y)
+      var r = parseInt(Math.sqrt(Math.pow(x,2) + Math.pow(y,2)))
 
-      console.log('x: ', x, 'y: ', y, 'r: ', Math.sqrt(Math.pow(x,2) + Math.pow(y,2)))
+      self.updateCoordDisplay(x, y, r)
 
       self.controls.update(deltaMsec/1000)
 
@@ -70,5 +72,11 @@ module.exports = {
         segment.scale.x = frequencyData[i] * 3 + 1
       })
     })
+  },
+
+  updateCoordDisplay: function (x, y, r) {
+    $('#X').text('X / ' + x)
+    $('#Y').text('Y / ' + y)
+    $('#R').text('R / ' + r)
   }
 }
