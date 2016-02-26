@@ -51,7 +51,7 @@ module.exports = {
 
   addRingsToScene: function (num) {
     this.rings = range(num).map(function (z) {
-      return new PiecewiseRing({ x0: 0, y0: 0, r: 200, numSegments: 51, z: z * 50})
+      return new PiecewiseRing({ x0: 0, y0: 0, r: 400, numSegments: 51, z: z * 50})
     })
     this.rings.forEach(this.addRingToScene.bind(this))
   },
@@ -67,7 +67,7 @@ module.exports = {
     var frequencyData = this.analyser.getFrequencyData()
     this.rings.forEach(function (ring) {
       ring.segments.forEach(function (segment, i) {
-        segment.scale.x = frequencyData[i] + 1
+        segment.scale.x = frequencyData[i] * 3 + 1
       })
     })
   }
