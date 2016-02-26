@@ -1,9 +1,10 @@
 var THREE = require('three')
 var WindowResize = require('three-window-resize')
 var OrbitControls = require('three-orbit-controls')(THREE)
-require('three-fly-controls')(THREE)
+var TubeControls = require('./tube-controls')(THREE)
 var PiecewiseRing = require('./piecewise-ring')
 var range = require('lodash.range')
+var $ = require('jquery')
 
 module.exports = {
   scene: new THREE.Scene(),
@@ -14,16 +15,14 @@ module.exports = {
     this.analyser = analyser
 
     var windowResize = new WindowResize(this.renderer, this.camera)
-    // var controls = new OrbitControls(this.camera)
 
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     document.body.appendChild(this.renderer.domElement)
 
-    this.controls = new THREE.FlyControls(this.camera, document.body)
-    this.controls.dragToLook = true
+    this.controls = new TubeControls(this.camera, document.body)
     this.controls.autoForward = true
     this.controls.movementSpeed = 0.4
-  	this.controls.rollSpeed = 0.001
+    this.controls.rollSpeed = 0.0005
 
     this.camera.position.z = 5000
   },
@@ -40,6 +39,13 @@ module.exports = {
       lastTimeMsec  = nowMsec
       self.updateRingWithFrequencyData()
 
+      var x = parseInt(self.controls.object.position.x)
+      var y = parseInt(self.controls.object.position.y)
+      var r = parseInt(Math.sqrt(Math.pow(x,2) + Math.pow(y,2)))
+      var theta = parseInt((self.controls.object.rotation.z * 57.2958) % 360)
+
+      self.updateCoordDisplay(x, y, r, theta)
+
       self.controls.update(deltaMsec/1000)
 
       self.renderer.render(self.scene, self.camera)
@@ -48,7 +54,7 @@ module.exports = {
 
   addRingsToScene: function (num) {
     this.rings = range(num).map(function (z) {
-      return new PiecewiseRing({ x0: 0, y0: 0, r: 200, numSegments: 51, z: z * 50})
+      return new PiecewiseRing({ x0: 0, y0: 0, r: 400, numSegments: 51, z: z * 50})
     })
     this.rings.forEach(this.addRingToScene.bind(this))
   },
@@ -64,8 +70,15 @@ module.exports = {
     var frequencyData = this.analyser.getFrequencyData()
     this.rings.forEach(function (ring) {
       ring.segments.forEach(function (segment, i) {
-        segment.scale.x = frequencyData[i] + 1
+        segment.scale.x = frequencyData[i] * 3 + 1
       })
     })
+  },
+
+  updateCoordDisplay: function (x, y, r, theta) {
+    $('#X').text('X / ' + x)
+    $('#Y').text('Y / ' + y)
+    $('#R').text('R / ' + r)
+    $('#T').text('T / ' + theta)
   }
 }
