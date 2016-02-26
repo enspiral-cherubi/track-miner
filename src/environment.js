@@ -1,7 +1,7 @@
 var THREE = require('three')
 var WindowResize = require('three-window-resize')
 var OrbitControls = require('three-orbit-controls')(THREE)
-require('three-fly-controls')(THREE)
+var TubeControls = require('./tube-controls')(THREE)
 var PiecewiseRing = require('./piecewise-ring')
 var range = require('lodash.range')
 
@@ -14,16 +14,14 @@ module.exports = {
     this.analyser = analyser
 
     var windowResize = new WindowResize(this.renderer, this.camera)
-    // var controls = new OrbitControls(this.camera)
 
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     document.body.appendChild(this.renderer.domElement)
 
-    this.controls = new THREE.FlyControls(this.camera, document.body)
-    this.controls.dragToLook = true
+    this.controls = new TubeControls(this.camera, document.body)
     this.controls.autoForward = true
     this.controls.movementSpeed = 0.4
-  	this.controls.rollSpeed = 0.001
+    this.controls.rollSpeed = 0.0005
 
     this.camera.position.z = 5000
   },
@@ -40,7 +38,9 @@ module.exports = {
       lastTimeMsec  = nowMsec
       self.updateRingWithFrequencyData()
 
+      self.controls.moveState.rollLeft = 1
       self.controls.update(deltaMsec/1000)
+
 
       self.renderer.render(self.scene, self.camera)
     })
