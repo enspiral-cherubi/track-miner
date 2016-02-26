@@ -5,9 +5,33 @@ html, body {
 
 body {
   margin: 0;
+  font-family: 'Lato', cursive;
+  font-weight: 100;
 }
 
 canvas {
   width: 100%;
   height: 100%
+}
+
+#display {
+  position: fixed;
+  width: 100%;
+  height: 70px;
+  /*background: rgba(255,0,255,0.4);*/
+  background: black;
+  color: white;
+  bottom: 0;
+  text-align: center;
+  font-size: 50px;
+}
+
+.value {
+  margin: auto 75px;
+}
+
+.vertalign {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
