@@ -38,9 +38,12 @@ module.exports = {
       lastTimeMsec  = nowMsec
       self.updateRingWithFrequencyData()
 
-      self.controls.moveState.rollLeft = 1
-      self.controls.update(deltaMsec/1000)
+      var x = parseInt(self.controls.object.position.x)
+      var y = parseInt(self.controls.object.position.y)
 
+      console.log('x: ', x, 'y: ', y, 'r: ', Math.sqrt(Math.pow(x,2) + Math.pow(y,2)))
+
+      self.controls.update(deltaMsec/1000)
 
       self.renderer.render(self.scene, self.camera)
     })
