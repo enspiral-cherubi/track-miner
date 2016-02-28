@@ -39,6 +39,10 @@ SpectrumAnalyser.prototype.mute = function () {
   this.gainNode.gain.value = 0
 }
 
+SpectrumAnalyser.prototype.isRunning = function () {
+  return this.analyser
+}
+
 SpectrumAnalyser.prototype.getFrequencyData = function () {
   var self = this
 

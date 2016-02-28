@@ -37,7 +37,7 @@ module.exports = {
       lastTimeMsec  = lastTimeMsec || nowMsec-1000/60
       var deltaMsec = Math.min(200, nowMsec - lastTimeMsec)
       lastTimeMsec  = nowMsec
-      self.updateRingWithFrequencyData()
+      if (self.analyser.isRunning()) { self.updateRingWithFrequencyData() }
 
       var x = parseInt(self.controls.object.position.x)
       var y = parseInt(self.controls.object.position.y)
