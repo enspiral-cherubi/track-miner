@@ -39,12 +39,7 @@ module.exports = {
       lastTimeMsec  = nowMsec
       if (self.analyser.isRunning()) { self.updateRingWithFrequencyData() }
 
-      var x = parseInt(self.controls.object.position.x)
-      var y = parseInt(self.controls.object.position.y)
-      var r = parseInt(Math.sqrt(Math.pow(x,2) + Math.pow(y,2)))
-      var theta = parseInt((self.controls.object.rotation.z * 57.2958) % 360)
-
-      self.updateCoordDisplay(x, y, r, theta)
+      self.updateCoordDisplay()
 
       self.controls.update(deltaMsec/1000)
 
@@ -75,7 +70,11 @@ module.exports = {
     })
   },
 
-  updateCoordDisplay: function (x, y, r, theta) {
+  updateCoordDisplay: function () {
+    var x = parseInt(this.controls.object.position.x)
+    var y = parseInt(this.controls.object.position.y)
+    var r = parseInt(Math.sqrt(Math.pow(x,2) + Math.pow(y,2)))
+    var theta = parseInt((this.controls.object.rotation.z * 57.2958) % 360)
     $('#X').text('X / ' + x)
     $('#Y').text('Y / ' + y)
     $('#R').text('R / ' + r)
