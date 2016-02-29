@@ -19,12 +19,18 @@ module.exports = {
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     document.body.appendChild(this.renderer.domElement)
 
+    this.camera.position.z = 5000
+  },
+
+  startControls: function () {
     this.controls = new TubeControls(this.camera, document.body)
     this.controls.autoForward = true
     this.controls.movementSpeed = 0.4
     this.controls.rollSpeed = 0.0005
+  },
 
-    this.camera.position.z = 5000
+  stopControls: function () {
+    this.controls = null
   },
 
   startAnimation: function () {
@@ -39,9 +45,10 @@ module.exports = {
       lastTimeMsec  = nowMsec
       if (self.analyser.isRunning()) { self.updateRingWithFrequencyData() }
 
-      self.updateCoordDisplay()
-
-      self.controls.update(deltaMsec/1000)
+      if (self.controls) {
+        self.controls.update(deltaMsec/1000)
+        self.updateCoordDisplay()
+      }
 
       self.renderer.render(self.scene, self.camera)
     })

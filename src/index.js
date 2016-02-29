@@ -14,7 +14,6 @@ $('#url-form').submit(function (e) {
   analyser.start(url).then(closeForm)
 })
 
-
 environment.init(analyser)
 environment.startAnimation()
 environment.addRingsToScene(200)
@@ -22,9 +21,11 @@ environment.addRingsToScene(200)
 function openForm () {
   $('#url-form-container').show()
   $('#open-url-form-btn').hide()
+  environment.stopControls()
 }
 
 function closeForm () {
   $('#url-form-container').hide()
   $('#open-url-form-btn').show()
+  environment.startControls()
 }
