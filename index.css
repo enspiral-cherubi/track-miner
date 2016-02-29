@@ -88,3 +88,9 @@ canvas {
   letter-spacing: inherit;
   font-size: 12px;
 }
+
+/* overrides */
+
+input:focus {
+  outline: none;
+}
