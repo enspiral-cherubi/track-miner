@@ -1,10 +1,6 @@
-### milestones
+### todo
 
-- soundcloud url form, triggered by space bar
-- type in soundcloud url
-- starts song, resets spectrum analyser
-
-
+- push pop ring creation/destruction
 - design and render spaceship
 - camera moves through tube
 - camera can move up down left right within the bounds of the tube

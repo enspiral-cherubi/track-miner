@@ -18,7 +18,11 @@ SpectrumAnalyser.prototype.start = function (url) {
   var streamUrl = 'https://api.soundcloud.com/resolve.json?url=' + url + '&client_id=' + clientID
   return $.get(streamUrl, function (res) {
     var streamUrl = res.stream_url + '?client_id=' + clientID
-    self.setupAudio(streamUrl)
+    if (self.audio) {
+      self.changeSourceTo(streamUrl)
+    } else {
+      self.setupAudio(streamUrl)
+    }
   })
 }
 
@@ -40,7 +44,16 @@ SpectrumAnalyser.prototype.mute = function () {
 }
 
 SpectrumAnalyser.prototype.isRunning = function () {
-  return this.analyser
+  return this.analyser && !this.audio.paused
+}
+
+SpectrumAnalyser.prototype.changeSourceTo = function (streamUrl) {
+  this.audio.pause()
+  this.audio = new Audio(streamUrl)
+  this.audio.crossOrigin = 'anonymous'
+  this.source = this.context.createMediaElementSource(this.audio)
+  this.source.connect(this.analyser)
+  this.audio.play()
 }
 
 SpectrumAnalyser.prototype.getFrequencyData = function () {
