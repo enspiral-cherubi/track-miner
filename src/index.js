@@ -4,17 +4,12 @@ var $ = require('jquery')
 var analyser = new SpectrumAnalyser()
 
 $('#open-url-form-btn').click(openForm)
-
 $('#close-url-form-btn').click(closeForm)
 
 $('#url-form').submit(function (e) {
   e.preventDefault()
   var url = $('#url-field').val()
-  analyser.start(url).then(function () {
-    analyser.source.disconnect()
-    analyser.start(url)
-    closeForm()
-  })
+  analyser.start(url).then(closeForm)
 })
 
 environment.init(analyser)
