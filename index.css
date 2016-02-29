@@ -89,6 +89,18 @@ canvas {
   font-size: 12px;
 }
 
+#close-url-form-btn {
+  position: absolute;
+  top: 10px;
+  font-size: 60px;
+  right: 10px;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  color: #FFFBF1;
+  cursor: pointer;
+}
+
 /* overrides */
 
 input:focus {
