@@ -23,7 +23,7 @@ module.exports = function(THREE) {
         this.movementSpeed = (opts.movementSpeed === undefined) ? 1.0 : opts.movementSpeed;
         this.rollSpeed = (opts.rollSpeed === undefined) ? 0.005 : opts.rollSpeed;
 
-        this.autoForward = false;
+        this.autoForward = true;
 
         // disable default target object behavior
 

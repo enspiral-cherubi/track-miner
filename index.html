@@ -7,6 +7,13 @@
     <link href='https://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'> <link href="index.css" rel="stylesheet" />
   </head>
   <body>
+    <div id="open-url-form-btn">
+      <div class="vertalign" id="open-url-form-btn-text-container">
+        <div>LO</div>
+        <div>AD</div>
+      </div>
+    </div>
+
     <div id="display">
       <div class="vertalign">
         <span class="value" id="X"></span>
@@ -14,6 +21,21 @@
         <span class="value" id="R"></span>
         <span class="value" id="T"></span>
       </div>
+    </div>
+
+    <div id="url-form-container">
+      <div class="vertalign">
+        <h2 id="url-form-heading">enter a soundcloud url</h2>
+        <form id="url-form">
+          <div id="url-field-container">
+            <input type="text" id="url-field" name="url" value="https://soundcloud.com/whatisgoogins/over-the-hill">
+            <p id="url-form-error">invalid url -- try another?</p>
+          </div>
+          <input type="submit" id="url-submit-btn" value="OK">
+        </form>
+      </div>
+
+      <div id="close-url-form-btn">&times;</div>
     </div>
     <script src="bundle.js"></script>
   </body>
