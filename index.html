@@ -14,7 +14,6 @@
       </div>
     </div>
 
-
     <div id="display">
       <div class="vertalign">
         <span class="value" id="X"></span>
@@ -28,7 +27,10 @@
       <div class="vertalign">
         <h2 id="url-form-heading">enter a soundcloud url</h2>
         <form id="url-form">
-          <input type="text" id="url-field" name="url" value="https://soundcloud.com/whatisgoogins/over-the-hill">
+          <div id="url-field-container">
+            <input type="text" id="url-field" name="url" value="https://soundcloud.com/whatisgoogins/over-the-hill">
+            <p id="url-form-error">invalid url -- try another?</p>
+          </div>
           <input type="submit" id="url-submit-btn" value="OK">
         </form>
       </div>

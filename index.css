@@ -93,12 +93,25 @@ canvas {
   color: inherit;
   font-weight: inherit;
   display: block;
-  margin: 0 auto;
-  width: 80%;
-  max-width: 450px;
+  width: 100%;
   text-align: center;
   padding: 5px;
   letter-spacing: inherit
+}
+
+#url-field-container {
+  position: relative;
+  margin: 0 auto;
+  width: 80%;
+  max-width: 450px;
+}
+
+#url-form-error {
+  font-size: 12px;
+  background: rgba(145, 0, 0, 0.6);
+  display: none;
+  width: 70%;
+  padding: 5px;
 }
 
 #url-submit-btn {

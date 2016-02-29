@@ -9,7 +9,9 @@ $('#close-url-form-btn').click(closeForm)
 $('#url-form').submit(function (e) {
   e.preventDefault()
   var url = $('#url-field').val()
-  analyser.start(url).then(closeForm)
+  analyser.start(url)
+    .then(closeForm)
+    .fail(displayUrlError)
 })
 
 environment.init(analyser)
@@ -25,5 +27,11 @@ function openForm () {
 function closeForm () {
   $('#url-form-container').hide()
   $('#open-url-form-btn').show()
+  $('#url-form-error').hide()
   environment.startControls()
+}
+
+function displayUrlError (err) {
+  $('#url-form-error').css('display', 'inline-block')
+  $('#url-field').val('')
 }
