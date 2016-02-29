@@ -1,37 +1,18 @@
 var environment = require('./environment')
 var SpectrumAnalyser = require('./spectrum-analyser')
-var $ = require('jquery')
+var view = require('./view')(environment)
 var analyser = new SpectrumAnalyser()
+var $ = require('jquery')
 
-$('#open-url-form-btn').click(openForm)
-$('#close-url-form-btn').click(closeForm)
-
+$('#open-url-form-btn').click(view.openForm)
+$('#close-url-form-btn').click(view.closeForm)
 $('#url-form').submit(function (e) {
   e.preventDefault()
-  var url = $('#url-field').val()
-  analyser.start(url)
-    .then(closeForm)
-    .fail(displayUrlError)
+  analyser.start($('#url-field').val())
+          .then(view.closeForm)
+          .fail(view.displayUrlError)
 })
 
 environment.init(analyser)
 environment.startAnimation()
 environment.addRingsToScene(200)
-
-function openForm () {
-  $('#url-form-container').show()
-  $('#open-url-form-btn').hide()
-  environment.stopControls()
-}
-
-function closeForm () {
-  $('#url-form-container').hide()
-  $('#open-url-form-btn').show()
-  $('#url-form-error').hide()
-  environment.startControls()
-}
-
-function displayUrlError (err) {
-  $('#url-form-error').css('display', 'inline-block')
-  $('#url-field').val('')
-}

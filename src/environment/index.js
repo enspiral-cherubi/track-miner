@@ -19,6 +19,8 @@ module.exports = {
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     document.body.appendChild(this.renderer.domElement)
 
+    this.startControls()
+
     this.camera.position.z = 5000
   },
 
