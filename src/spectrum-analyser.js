@@ -16,7 +16,7 @@ function SpectrumAnalyser () {
 SpectrumAnalyser.prototype.start = function (url) {
   var self = this
   var streamUrl = 'https://api.soundcloud.com/resolve.json?url=' + url + '&client_id=' + clientID
-  $.get(streamUrl, function (res) {
+  return $.get(streamUrl, function (res) {
     var streamUrl = res.stream_url + '?client_id=' + clientID
     self.setupAudio(streamUrl)
   })
