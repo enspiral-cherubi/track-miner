@@ -8,7 +8,7 @@ var $ = require('jquery')
 
 module.exports = {
   scene: new THREE.Scene(),
-  camera: new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000),
+  camera: new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 3000),
   renderer: new THREE.WebGLRenderer({alpha: true}),
 
   init: function (analyser) {
@@ -38,6 +38,7 @@ module.exports = {
   startAnimation: function () {
     var self = this
     var lastTimeMsec = null
+    var startTime = +new Date();
 
     requestAnimationFrame(function render (nowMsec) {
       requestAnimationFrame(render)
@@ -45,8 +46,18 @@ module.exports = {
       lastTimeMsec  = lastTimeMsec || nowMsec-1000/60
       var deltaMsec = Math.min(200, nowMsec - lastTimeMsec)
       lastTimeMsec  = nowMsec
-      if (self.analyser.isRunning()) { self.updateRingWithFrequencyData() }
+      if (self.analyser.isRunning()) { self.updateRingWithFrequencyData(deltaMsec) }
 
+      self.rings.forEach(function (ring) {
+        ring.segments.forEach(function(segment, i) {
+          ring.props.duration = 50000
+          segment.position.x = segment.props.x0 + segment.props.r * Math.cos(segment.props.theta + (((nowMsec - startTime) / ring.props.duration) * Math.PI) % (2 * Math.PI))
+          segment.position.y = segment.props.y0 + segment.props.r * Math.sin(segment.props.theta + (((nowMsec - startTime) / ring.props.duration) * Math.PI) % (2 * Math.PI)),
+          segment.position.z = segment.props.z
+          segment.rotation.z = segment.props.theta + (((nowMsec - startTime)  / ring.props.duration) * Math.PI) % (2 * Math.PI)
+        });
+      });
+      
       if (self.controls) {
         self.controls.update(deltaMsec/1000)
         self.updateCoordDisplay()
@@ -70,11 +81,28 @@ module.exports = {
     })
   },
 
-  updateRingWithFrequencyData: function () {
-    var frequencyData = this.analyser.getFrequencyData()
+  updateRingWithFrequencyData: function (msec) {
+    function dist(vector0, vector1){
+
+      deltaX = vector1.x - vector0.x;
+      deltaY = vector1.y - vector0.y;
+      deltaZ = vector1.z - vector0.z;
+
+      distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ);
+
+      return distance;
+    }
+    
+    var frequencyData = this.analyser.getFrequencyData(),
+      that = this
     this.rings.forEach(function (ring) {
       ring.segments.forEach(function (segment, i) {
-        segment.scale.x = frequencyData[i] * 3 + 1
+        distance = dist(segment.position, that.camera.position)
+        distanceMultiplier = Math.min(0.75, distance / 2500);
+        if(distance > 3000) return
+                
+        segment.scale.x = (frequencyData[i] * 2.5 + 1) * (distanceMultiplier * 1.15)
+        segment.scale.y = (frequencyData[i] * 0.075 + 1) * (distanceMultiplier * 0.75)
       })
     })
   },
