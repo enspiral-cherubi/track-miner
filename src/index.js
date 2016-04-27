@@ -1,9 +1,12 @@
-var environment = require('./environment')
+import Environment from './environment/index.js'
 var clientId = process.env.CLIENT_ID
-var SpectrumAnalyser = require('./spectrum-analyser')
-var view = require('./view')(environment)
+import SpectrumAnalyser from './spectrum-analyser/index.js'
 var analyser = new SpectrumAnalyser()
-var $ = require('jquery')
+import View from './view/index.js'
+import $ from 'jquery'
+
+var environment = new Environment(analyser)
+var view = new View(environment)
 
 $('#open-url-form-btn').click(view.openForm)
 $('#close-url-form-btn').click(view.closeForm)
@@ -14,6 +17,5 @@ $('#url-form').submit(function (e) {
           .fail(view.displayUrlError)
 })
 
-environment.init(analyser)
 environment.startAnimation()
 environment.addRingsToScene(200)

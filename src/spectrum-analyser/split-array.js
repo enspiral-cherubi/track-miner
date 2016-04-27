@@ -1,4 +1,4 @@
-module.exports = function (input, maxLength) {
+function splitArray (input, maxLength) {
 	var result = [];
 	var part = [];
 
@@ -13,5 +13,7 @@ module.exports = function (input, maxLength) {
 		}
 	}
 
-	return result;
-};
+	return result
+}
+
+export default splitArray

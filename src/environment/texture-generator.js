@@ -1,13 +1,16 @@
-var THREE = require('three')
+import THREE from 'three'
 
-module.exports = function TextureGenerator() {
-  var COLORS = ['#000000', '#910000', '#CBB370', '#21786C'],
-   textures = {};
+class TextureGenerator {
 
-  this.generate = function(theta) {
-    index = Math.floor(theta * Math.PI) % COLORS.length;
+  constructor () {
+    this.colors = ['#000000', '#910000', '#CBB370', '#21786C'],
+    this.textures = {}
+  }
 
-    if (textures[index]) { return textures[index]; }
+  generate (theta) {
+    var index = Math.floor(theta * Math.PI) % this.colors.length;
+
+    if (this.textures[index]) { return this.textures[index]; }
     var size = 100
 
     // create canvas
@@ -21,13 +24,15 @@ module.exports = function TextureGenerator() {
     // draw gradient
     context.rect(0, 0, size, size)
     var gradient = context.createLinearGradient(0, 0, size, 0)
-    gradient.addColorStop(0, COLORS[index]) // light blue
+    gradient.addColorStop(0, this.colors[index]) // light blue
     gradient.addColorStop(1, 'rgba(255, 255, 255, 0)')
     context.fillStyle = gradient
     context.fill()
 
     var texture = new THREE.Texture(canvas);
     texture.needsUpdate = true
-    return textures[index] = texture
+    return this.textures[index] = texture
   }
 }
+
+export default TextureGenerator

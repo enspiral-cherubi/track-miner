@@ -1,41 +1,39 @@
-var THREE = require('three')
-var WindowResize = require('three-window-resize')
-var OrbitControls = require('three-orbit-controls')(THREE)
-var TubeControls = require('./tube-controls')(THREE)
-var PiecewiseRing = require('./piecewise-ring')
-var range = require('lodash.range')
-var $ = require('jquery')
+import THREE from 'three'
+import WindowResize from 'three-window-resize'
+import ThreeOrbitControls from 'three-orbit-controls'
+var OrbitControls = ThreeOrbitControls(THREE)
+import ThreeFlyControls from './tube-controls.js'
+var TubeControls = ThreeFlyControls(THREE)
+import PiecewiseRing from './piecewise-ring.js'
+import range from 'lodash.range'
+import $ from 'jquery'
 
-module.exports = {
-  scene: new THREE.Scene(),
-  camera: new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000),
-  renderer: new THREE.WebGLRenderer({alpha: true}),
+class Environment {
 
-  init: function (analyser) {
+  constructor (analyser) {
+    this.scene = new THREE.Scene()
+    this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000)
+    this.renderer = new THREE.WebGLRenderer({alpha: true, canvas: document.getElementById('environment')})
     this.analyser = analyser
-
     var windowResize = new WindowResize(this.renderer, this.camera)
-
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     document.body.appendChild(this.renderer.domElement)
-
     this.startControls()
-
     this.camera.position.z = 5000
-  },
+  }
 
-  startControls: function () {
+  startControls () {
     this.controls = new TubeControls(this.camera, document.body)
     this.controls.autoForward = true
     this.controls.movementSpeed = 0.4
     this.controls.rollSpeed = 0.0005
-  },
+  }
 
-  stopControls: function () {
+  stopControls () {
     this.controls = null
-  },
+  }
 
-  startAnimation: function () {
+  startAnimation () {
     var self = this
     var lastTimeMsec = null
 
@@ -54,32 +52,32 @@ module.exports = {
 
       self.renderer.render(self.scene, self.camera)
     })
-  },
+  }
 
-  addRingsToScene: function (num) {
+  addRingsToScene (num) {
     this.rings = range(num).map(function (z) {
       return new PiecewiseRing({ x0: 0, y0: 0, r: 400, numSegments: 51, z: z * 50})
     })
     this.rings.forEach(this.addRingToScene.bind(this))
-  },
+  }
 
-  addRingToScene: function (ring) {
+  addRingToScene (ring) {
     var self = this
     ring.segments.forEach(function (segment, i) {
       self.scene.add(segment)
     })
-  },
+  }
 
-  updateRingWithFrequencyData: function () {
+  updateRingWithFrequencyData () {
     var frequencyData = this.analyser.getFrequencyData()
     this.rings.forEach(function (ring) {
       ring.segments.forEach(function (segment, i) {
         segment.scale.x = frequencyData[i] * 3 + 1
       })
     })
-  },
+  }
 
-  updateCoordDisplay: function () {
+  updateCoordDisplay () {
     var x = parseInt(this.controls.object.position.x)
     var y = parseInt(this.controls.object.position.y)
     var r = parseInt(Math.sqrt(Math.pow(x,2) + Math.pow(y,2)))
@@ -89,4 +87,7 @@ module.exports = {
     $('#R').text('R / ' + r)
     $('#T').text('T / ' + theta)
   }
+
 }
+
+export default Environment

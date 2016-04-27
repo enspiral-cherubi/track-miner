@@ -1,6 +1,6 @@
-var THREE = require('three')
+import THREE from 'three'
 
-module.exports = function (props) {
+function ringSegment (props) {
   var geometry = new THREE.CubeGeometry(0.5, 3, 5)
   var mesh = new THREE.Mesh(geometry, props.material)
   mesh.position.x = props.x0 + props.r * Math.cos(props.theta)
@@ -9,3 +9,5 @@ module.exports = function (props) {
   mesh.rotation.z = props.theta
   return mesh
 }
+
+export default ringSegment

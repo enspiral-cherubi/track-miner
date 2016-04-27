@@ -7,7 +7,7 @@
  */
 
 
-module.exports = function(THREE) {
+export default function(THREE) {
 
     return function ( object, domElement, opts ) {
 
