@@ -1,5 +1,5 @@
 var $ = require('jquery')
-var clientID = process.env.CLIENT_ID
+var clientId = process.env.CLIENT_ID
 var range = require('lodash.range')
 var splitArray = require('./split-array')
 var avg = require('./avg')
@@ -15,9 +15,9 @@ function SpectrumAnalyser () {
 
 SpectrumAnalyser.prototype.start = function (url) {
   var self = this
-  var streamUrl = 'https://api.soundcloud.com/resolve.json?url=' + url + '&client_id=' + clientID
+  var streamUrl = 'https://api.soundcloud.com/resolve.json?url=' + url + '&client_id=' + clientId
   return $.get(streamUrl, function (res) {
-    var streamUrl = res.stream_url + '?client_id=' + clientID
+    var streamUrl = res.stream_url + '?client_id=' + clientId
     self.setupAudio(streamUrl)
   })
 }

@@ -1,4 +1,5 @@
 var environment = require('./environment')
+var clientId = process.env.CLIENT_ID
 var SpectrumAnalyser = require('./spectrum-analyser')
 var view = require('./view')(environment)
 var analyser = new SpectrumAnalyser()
