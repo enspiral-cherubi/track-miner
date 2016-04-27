@@ -4,37 +4,32 @@ import range from 'lodash.range'
 import splitArray from './split-array.js'
 import avg from './avg.js'
 import flatten from 'lodash.flatten'
+import SoundcloudAudioSourceClient from './soundcloud-audio-source-client.js'
 
 class SpectrumAnalyser {
 
   constructor () {
     this.numOfFrequencyBands = 1024
-    this.context = new AudioContext()
-    this.gainNode = this.context.createGain()
+    this.audioCtx = new AudioContext()
+    this.gainNode = this.audioCtx.createGain()
     this.frequencyData = new Uint8Array(this.numOfFrequencyBands)
-    this.output = this.context.destination
-  }
-
-  start (url) {
-    var streamUrl = 'https://api.soundcloud.com/resolve.json?url=' + url + '&client_id=' + clientId
-    return $.get(streamUrl, (res) => {
-      var streamUrl = res.stream_url + '?client_id=' + clientId
-      this.setupAudio(streamUrl)
+    this.output = this.audioCtx.destination
+    this.scAudioSourceClient = new SoundcloudAudioSourceClient({
+      audioCtx: this.audioCtx,
+      clientId: clientId
     })
   }
 
-  setupAudio (streamUrl) {
-    if (this.audio) { this.audio.pause() }
-    this.audio = new Audio(streamUrl)
-    this.audio.crossOrigin = 'anonymous';
-    this.source = this.context.createMediaElementSource(this.audio);
-    this.output = this.context.destination;
-    this.analyser = this.context.createAnalyser();
-    this.analyser.fftSize = this.numOfFrequencyBands * 2;
-    this.source.connect(this.analyser);
-    this.analyser.connect(this.gainNode);
-    this.gainNode.connect(this.output);
-    this.audio.play()
+  start (url) {
+    this.scAudioSourceClient.setUrl(url).then(() => {
+      this.output = this.audioCtx.destination;
+      this.analyser = this.audioCtx.createAnalyser();
+      this.analyser.fftSize = this.numOfFrequencyBands * 2;
+      this.scAudioSourceClient.source.connect(this.analyser);
+      this.analyser.connect(this.gainNode);
+      this.gainNode.connect(this.output);
+      this.scAudioSourceClient.audio.play()
+    })
   }
 
   mute () {
@@ -42,7 +37,7 @@ class SpectrumAnalyser {
   }
 
   isRunning () {
-    return this.analyser && !this.audio.paused
+    return this.analyser && !this.scAudioSourceClient.audio.paused
   }
 
   getFrequencyData () {
