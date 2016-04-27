@@ -55,7 +55,7 @@ class Environment {
   }
 
   addRingsToScene (num) {
-    this.rings = range(num).map(function (z) {
+    this.rings = range(num).map((z) => {
       return new PiecewiseRing({ x0: 0, y0: 0, r: 400, numSegments: 51, z: z * 50})
     })
     this.rings.forEach(this.addRingToScene.bind(this))
@@ -70,8 +70,8 @@ class Environment {
 
   updateRingWithFrequencyData () {
     var frequencyData = this.analyser.getFrequencyData()
-    this.rings.forEach(function (ring) {
-      ring.segments.forEach(function (segment, i) {
+    this.rings.forEach((ring) => {
+      ring.segments.forEach((segment, i) => {
         segment.scale.x = frequencyData[i] * 3 + 1
       })
     })

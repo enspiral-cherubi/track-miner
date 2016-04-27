@@ -16,11 +16,10 @@ class SpectrumAnalyser {
   }
 
   start (url) {
-    var self = this
     var streamUrl = 'https://api.soundcloud.com/resolve.json?url=' + url + '&client_id=' + clientId
-    return $.get(streamUrl, function (res) {
+    return $.get(streamUrl, (res) => {
       var streamUrl = res.stream_url + '?client_id=' + clientId
-      self.setupAudio(streamUrl)
+      this.setupAudio(streamUrl)
     })
   }
 
@@ -47,8 +46,6 @@ class SpectrumAnalyser {
   }
 
   getFrequencyData () {
-    var self = this
-
     this.analyser.getByteFrequencyData(this.frequencyData)
 
     var logSubsectionSlicePoints = [
@@ -61,11 +58,11 @@ class SpectrumAnalyser {
       {x0: 871, x1: 1023}
     ]
 
-    var logSubsections = logSubsectionSlicePoints.map(function (point) {
-      return self.frequencyData.slice(point.x0, point.x1)
+    var logSubsections = logSubsectionSlicePoints.map((point) => {
+      return this.frequencyData.slice(point.x0, point.x1)
     })
 
-    var averages = flatten(logSubsections.map(function (subsection) {
+    var averages = flatten(logSubsections.map((subsection) => {
       var stepSize = Math.floor(subsection.length / 7)
       return splitArray(subsection, stepSize).map(avg)
     }))

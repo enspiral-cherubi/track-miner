@@ -11,19 +11,16 @@ class PiecewiseRing {
   }
 
   initializeRingSegments () {
-    var self = this
-    var thetaArray = range(0, Math.PI * 2, (Math.PI * 2) / this.props.numSegments),
-    textureGenerator = new TextureGenerator();
+    var thetaArray = range(0, Math.PI * 2, (Math.PI * 2) / this.props.numSegments)
+    var textureGenerator = new TextureGenerator()
 
-    this.segments = thetaArray.map(function (theta) {
-      var material = new THREE.MeshBasicMaterial({map: textureGenerator.generate(theta), transparent: true})
-
+    this.segments = thetaArray.map((theta) => {
       return RingSegment({
-        material: material,
-        x0: self.props.x0,
-        y0: self.props.y0,
-        r: self.props.r,
-        z: self.props.z,
+        material: new THREE.MeshBasicMaterial({map: textureGenerator.generate(theta), transparent: true}),
+        x0: this.props.x0,
+        y0: this.props.y0,
+        r: this.props.r,
+        z: this.props.z,
         theta: theta
       })
     })
