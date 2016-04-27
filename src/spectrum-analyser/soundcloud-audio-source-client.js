@@ -1,4 +1,4 @@
-import $ from 'jquery'
+import http from 'request-promise-json'
 
 class SoundcloudAudioSourceClient {
 
@@ -10,8 +10,8 @@ class SoundcloudAudioSourceClient {
   }
 
   setUrl (url) {
-    var urlToResolve = 'https://api.soundcloud.com/resolve.json?url=' + url + '&client_id=' + this.clientId
-    return $.get(urlToResolve, (res) => {
+    var resolveUrl = 'https://api.soundcloud.com/resolve.json?url=' + url + '&client_id=' + this.clientId
+    return http.get(resolveUrl).then((res) => {
       var streamUrl = res.stream_url + '?client_id=' + this.clientId
       if (this.audio) { this.audio.pause() }
       this.audio = new Audio(streamUrl)

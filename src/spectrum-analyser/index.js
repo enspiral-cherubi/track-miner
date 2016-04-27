@@ -21,7 +21,7 @@ class SpectrumAnalyser {
   }
 
   start (url) {
-    this.scAudioSourceClient.setUrl(url).then(() => {
+    return this.scAudioSourceClient.setUrl(url).then(() => {
       this.output = this.audioCtx.destination;
       this.analyser = this.audioCtx.createAnalyser();
       this.analyser.fftSize = this.numOfFrequencyBands * 2;
