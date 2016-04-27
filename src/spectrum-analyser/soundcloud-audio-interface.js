@@ -1,6 +1,6 @@
 import http from 'request-promise-json'
 
-class SoundcloudAudioSourceClient {
+class SoundcloudAudioInterface {
 
   constructor (opts) {
     this.clientId = opts.clientId
@@ -22,4 +22,4 @@ class SoundcloudAudioSourceClient {
 
 }
 
-export default SoundcloudAudioSourceClient
+export default SoundcloudAudioInterface

@@ -4,7 +4,7 @@ import range from 'lodash.range'
 import splitArray from './split-array.js'
 import avg from './avg.js'
 import flatten from 'lodash.flatten'
-import SoundcloudAudioSourceClient from './soundcloud-audio-source-client.js'
+import SoundcloudAudioInterface from './soundcloud-audio-interface.js'
 
 class SpectrumAnalyser {
 
@@ -14,21 +14,21 @@ class SpectrumAnalyser {
     this.gainNode = this.audioCtx.createGain()
     this.frequencyData = new Uint8Array(this.numOfFrequencyBands)
     this.output = this.audioCtx.destination
-    this.scAudioSourceClient = new SoundcloudAudioSourceClient({
+    this.scAudioInterface = new SoundcloudAudioInterface({
       audioCtx: this.audioCtx,
       clientId: clientId
     })
   }
 
   start (url) {
-    return this.scAudioSourceClient.setUrl(url).then(() => {
+    return this.scAudioInterface.setUrl(url).then(() => {
       this.output = this.audioCtx.destination;
       this.analyser = this.audioCtx.createAnalyser();
       this.analyser.fftSize = this.numOfFrequencyBands * 2;
-      this.scAudioSourceClient.source.connect(this.analyser);
+      this.scAudioInterface.source.connect(this.analyser);
       this.analyser.connect(this.gainNode);
       this.gainNode.connect(this.output);
-      this.scAudioSourceClient.audio.play()
+      this.scAudioInterface.audio.play()
     })
   }
 
@@ -37,7 +37,7 @@ class SpectrumAnalyser {
   }
 
   isRunning () {
-    return this.analyser && !this.scAudioSourceClient.audio.paused
+    return this.analyser && !this.scAudioInterface.audio.paused
   }
 
   getFrequencyData () {
