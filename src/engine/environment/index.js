@@ -31,10 +31,9 @@ class Environment {
   getCoords () {
     var x = parseInt(this.controls.object.position.x)
     var y = parseInt(this.controls.object.position.y)
-    var z = this.getZ()
     var r = parseInt(Math.sqrt(Math.pow(x,2) + Math.pow(y,2)))
     var theta = parseInt((this.controls.object.rotation.z * 57.2958) % 360)
-    return {x: x, y: y, r: r, theta: theta, z: z}
+    return {x: x, y: y, r: r, theta: theta}
   }
 
   getZ () {

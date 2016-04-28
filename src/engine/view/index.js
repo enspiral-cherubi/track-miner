@@ -5,7 +5,6 @@ class View {
   updateCoordDisplay (opts) {
     $('#X').text('X / ' + opts.x)
     $('#Y').text('Y / ' + opts.y)
-    $('#Z').text('Z / ' + opts.z)
     $('#R').text('R / ' + opts.r)
     $('#T').text('T / ' + opts.theta)
   }
