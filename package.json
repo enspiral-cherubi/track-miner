@@ -38,7 +38,7 @@
     "jquery": "^2.2.1",
     "lodash.flatten": "^4.1.0",
     "lodash.range": "^3.1.2",
-    "request-promise-json": "^1.0.4",
+    "soundcloud-audio-interface": "^1.0.2",
     "three": "^0.74.0",
     "three-orbit-controls": "^72.0.0",
     "three-window-resize": "^1.0.4"

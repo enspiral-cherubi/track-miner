@@ -4,7 +4,7 @@ import range from 'lodash.range'
 import splitArray from './split-array.js'
 import avg from './avg.js'
 import flatten from 'lodash.flatten'
-import SoundcloudAudioInterface from './soundcloud-audio-interface.js'
+import SoundcloudAudioInterface from 'soundcloud-audio-interface'
 
 class SpectrumAnalyser {
 
