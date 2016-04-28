@@ -2,7 +2,7 @@ import THREE from 'three'
 import WindowResize from 'three-window-resize'
 import ThreeFlyControls from './tube-controls.js'
 var TubeControls = ThreeFlyControls(THREE)
-import PiecewiseRing from './piecewise-ring.js'
+import PiecewiseRing from './piecewise-ring'
 import range from 'lodash.range'
 
 class Environment {

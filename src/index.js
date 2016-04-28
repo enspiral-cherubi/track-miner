@@ -1,4 +1,4 @@
-import Engine from './engine/index.js'
+import Engine from './engine'
 
 var engine = new Engine()
 engine.bindEventListeners()
