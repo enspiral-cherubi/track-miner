@@ -23,6 +23,12 @@ canvas {
   transform: translateY(-50%);
 }
 
+ul {
+  list-style: none;
+}
+
+/* loading screen */
+
 #loading-screen {
   position: fixed;
   width: 100%;
@@ -32,12 +38,61 @@ canvas {
 }
 
 #loading-msg {
-  position: relative;
-  top: 50%;
-  transform: translateZ(-50%);
   text-align: center;
   font-size: 18px;
   letter-spacing: 3px;
+}
+
+/* help screen */
+
+#help-screen {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 999;
+}
+
+#help-msg {
+  position: relative;
+  text-align: left;
+  letter-spacing: 3px;
+  margin: 0 auto;
+  width: 250px;
+}
+
+#controls-list {
+  display: inline-block;
+  padding-left: 0px;
+  margin: 0;
+}
+
+.control-character {
+  display: inline-block;
+  width: 25px;
+  text-align: center;
+}
+
+.control-description {
+  display: inline-block;
+  letter-spacing: 2px;
+}
+
+#help-screen-done-btn {
+  position: relative;
+  top: 4px;
+  left: 20px;
+  display: inline-block;
+  border: 2px solid;
+  border-color: #FFFBF1;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  color: #21786C;
+  background: #FFFBF1;
+  cursor: pointer;
+  letter-spacing: inherit;
+  font-size: 12px;
 }
 
 /* display */
