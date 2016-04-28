@@ -9,7 +9,7 @@ class Environment {
   constructor (opts) {
     this.opts = opts
     this.scene = new THREE.Scene()
-    this.camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 2000)
+    this.camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 3000)
     this.renderer = new THREE.WebGLRenderer({alpha: true, canvas: document.getElementById('environment')})
     var windowResize = new WindowResize(this.renderer, this.camera)
     this.renderer.setSize(window.innerWidth, window.innerHeight)
