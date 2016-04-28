@@ -8,6 +8,27 @@
     <link href="index.css" rel="stylesheet" />
   </head>
   <body>
+    <div id="loading-screen">
+      <div id="loading-msg" class="vertalign">
+        loading ...
+      </div>
+    </div>
+
+    <div id="help-screen">
+      <div id="help-msg" class="vertalign">
+        <ul id="controls-list">
+          <li><b class="control-character">w</b><span class="control-description">- up</span></li>
+          <li><b class="control-character">s</b><span class="control-description">- down</span></li>
+          <li><b class="control-character">a</b><span class="control-description">- left</span></li>
+          <li><b class="control-character">d</b><span class="control-description">- right</span></li>
+          <li><b class="control-character">e</b><span class="control-description">- roll cc</span></li>
+          <li><b class="control-character">q</b><span class="control-description">- roll ccw</span></li>
+        </ul>
+
+        <input type="submit" id="help-screen-done-btn" class="vertalign" value="GO">
+      </div>
+    </div>
+
     <canvas id="environment"></canvas>
 
     <div id="open-url-form-btn">
@@ -21,7 +42,6 @@
       <div class="vertalign">
         <span class="value" id="X"></span>
         <span class="value" id="Y"></span>
-        <span class="value" id="Z"></span>
         <span class="value" id="R"></span>
         <span class="value" id="T"></span>
       </div>
@@ -32,7 +52,7 @@
         <h2 id="url-form-heading">enter a soundcloud url</h2>
         <form id="url-form">
           <div id="url-field-container">
-            <input type="text" id="url-field" name="url" value="https://soundcloud.com/whatisgoogins/over-the-hill">
+            <input type="text" id="url-field" name="url" value="https://soundcloud.com/churchuk/mall-grab-cant">
             <p id="url-form-error">invalid url -- try another?</p>
           </div>
           <input type="submit" id="url-submit-btn" value="OK">
