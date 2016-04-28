@@ -26,14 +26,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/data-doge/track-miner"
+    "url": "https://github.com/enspiral-cherubi/track-miner"
   },
   "author": "data-doge",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/data-doge/track-miner/issues"
+    "url": "https://github.com/enspiral-cherubi/track-miner/issues"
   },
-  "homepage": "https://github.com/data-doge/track-miner",
+  "homepage": "https://github.com/enspiral-cherubi/track-miner",
   "dependencies": {
     "jquery": "^2.2.1",
     "lodash.range": "^3.1.2",
