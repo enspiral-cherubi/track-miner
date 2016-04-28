@@ -41,7 +41,7 @@ class Environment {
   }
 
   newRingReady () {
-    return this.getZ() % 50 === 0
+    return this.controls && this.getZ() % 50 === 0
   }
 
   addRingToEnd () {
