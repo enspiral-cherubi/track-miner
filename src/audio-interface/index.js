@@ -2,7 +2,7 @@ var clientId = process.env.CLIENT_ID
 import SoundcloudAudioInterface from 'soundcloud-audio-interface'
 import webAudioAnalyser2 from 'web-audio-analyser-2'
 
-class SpectrumAnalyser {
+class AudioInterface {
 
   constructor () {
     this.audioCtx = new AudioContext()
@@ -22,10 +22,6 @@ class SpectrumAnalyser {
     })
   }
 
-  mute () {
-    this.gainNode.gain.value = 0
-  }
-
   isRunning () {
     return this.scAudioInterface.audio && !this.scAudioInterface.audio.paused
   }
@@ -36,4 +32,4 @@ class SpectrumAnalyser {
 
 }
 
-export default SpectrumAnalyser
+export default AudioInterface

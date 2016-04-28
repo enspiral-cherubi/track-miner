@@ -7,7 +7,6 @@ var TubeControls = ThreeFlyControls(THREE)
 import PiecewiseRing from './piecewise-ring.js'
 import range from 'lodash.range'
 import $ from 'jquery'
-import SpectrumAnalyser from './spectrum-analyser.js'
 
 class Environment {
 
@@ -15,7 +14,6 @@ class Environment {
     this.scene = new THREE.Scene()
     this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000)
     this.renderer = new THREE.WebGLRenderer({alpha: true, canvas: document.getElementById('environment')})
-    this.analyser = new SpectrumAnalyser()
     var windowResize = new WindowResize(this.renderer, this.camera)
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     document.body.appendChild(this.renderer.domElement)
@@ -34,59 +32,28 @@ class Environment {
     this.controls = null
   }
 
-  startAnimation () {
-    var self = this
-    var lastTimeMsec = null
-
-    requestAnimationFrame(function render (nowMsec) {
-      requestAnimationFrame(render)
-
-      lastTimeMsec  = lastTimeMsec || nowMsec-1000/60
-      var deltaMsec = Math.min(200, nowMsec - lastTimeMsec)
-      lastTimeMsec  = nowMsec
-      if (self.analyser.isRunning()) { self.updateRingWithFrequencyData() }
-
-      if (self.controls) {
-        self.controls.update(deltaMsec/1000)
-        self.updateCoordDisplay()
-      }
-
-      self.renderer.render(self.scene, self.camera)
-    })
+  fetchCoords () {
+    var x = parseInt(this.controls.object.position.x)
+    var y = parseInt(this.controls.object.position.y)
+    var r = parseInt(Math.sqrt(Math.pow(x,2) + Math.pow(y,2)))
+    var theta = parseInt((this.controls.object.rotation.z * 57.2958) % 360)
+    return {x: x, y: y, r: r, theta: theta}
   }
 
   addRingsToScene (num) {
     this.rings = range(num).map((z) => {
-      return new PiecewiseRing({ x0: 0, y0: 0, r: 400, numSegments: 24, z: z * 50})
-    })
-    this.rings.forEach(this.addRingToScene.bind(this))
-  }
-
-  addRingToScene (ring) {
-    var self = this
-    ring.segments.forEach(function (segment, i) {
-      self.scene.add(segment)
+      var ring = new PiecewiseRing({ x0: 0, y0: 0, r: 400, numSegments: 24, z: z * 50})
+      ring.segments.forEach(segment => this.scene.add(segment))
+      return ring
     })
   }
 
-  updateRingWithFrequencyData () {
-    var frequencyData = this.analyser.getFrequencyData()
+  updateRingWithFrequencyData (frequencyData) {
     this.rings.forEach((ring) => {
       ring.segments.forEach((segment, i) => {
         segment.scale.x = frequencyData[i] * 3 + 1
       })
     })
-  }
-
-  updateCoordDisplay () {
-    var x = parseInt(this.controls.object.position.x)
-    var y = parseInt(this.controls.object.position.y)
-    var r = parseInt(Math.sqrt(Math.pow(x,2) + Math.pow(y,2)))
-    var theta = parseInt((this.controls.object.rotation.z * 57.2958) % 360)
-    $('#X').text('X / ' + x)
-    $('#Y').text('Y / ' + y)
-    $('#R').text('R / ' + r)
-    $('#T').text('T / ' + theta)
   }
 
 }
