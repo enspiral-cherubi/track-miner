@@ -8,7 +8,7 @@ import loop from 'raf-loop'
 class Engine {
   constructor () {
     this.clock = new THREE.Clock()
-    this.environment = new Environment()
+    this.environment = new Environment({ringCount: 50})
     this.view = new View()
     this.audioInterface = new AudioInterface()
   }
@@ -20,9 +20,11 @@ class Engine {
   }
 
   start () {
-    this.environment.addRingsToScene(200)
+    this.environment.addRingsToScene()
 
     loop((t) => {
+      if (this.environment.newRingReady()) { this.environment.addRingToEnd() }
+
       if (this.audioInterface.isRunning()) {
         var frequencyData = this.audioInterface.getFrequencyData()
         this.environment.updateRingWithFrequencyData(frequencyData)

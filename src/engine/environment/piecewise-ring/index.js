@@ -25,6 +25,14 @@ class PiecewiseRing {
       })
     })
   }
+
+  removeFromScene (scene) {
+    this.segments.forEach((segment) => scene.remove(segment))
+  }
+
+  addToScene (scene) {
+    this.segments.forEach((segment) => scene.add(segment))    
+  }
 }
 
 
