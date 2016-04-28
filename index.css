@@ -49,7 +49,7 @@ ul {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: white;
+  background: rgba(255,255,255,0);
   z-index: 999;
 }
 
@@ -88,11 +88,16 @@ ul {
   border-radius: 50%;
   width: 100px;
   height: 100px;
-  color: #21786C;
-  background: #FFFBF1;
+  color: #FFFBF1;
+  background: rgba(145, 0, 0, 0.6);
   cursor: pointer;
   letter-spacing: inherit;
   font-size: 12px;
+  transition: 0.5s;
+}
+
+#help-screen-done-btn:hover {
+  background: rgba(145, 0, 0, 1);
 }
 
 /* display */
@@ -113,6 +118,7 @@ ul {
 }
 
 #open-url-form-btn {
+  display: none;
   position: absolute;
   top: 20px;
   right: 20px;

@@ -29,6 +29,11 @@ class View {
     $('#loading-screen').hide()
   }
 
+  closeHelpScreen () {
+    $('#help-screen').hide()
+    $('#open-url-form-btn').show()
+  }
+
 }
 
 export default View

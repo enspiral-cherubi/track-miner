@@ -16,6 +16,7 @@ class Engine {
   bindEventListeners () {
     $('#open-url-form-btn').click(this._openForm.bind(this))
     $('#close-url-form-btn').click(this._closeForm.bind(this))
+    $('#help-screen-done-btn').click(this.view.closeHelpScreen)
     $('#url-form').submit(this._submitForm.bind(this))
   }
 
