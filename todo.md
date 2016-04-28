@@ -1,8 +1,12 @@
 ### todo
 
-- push pop ring creation/destruction
 - design and render spaceship
 - camera can move up down left right within the bounds of the tube
+
+- help screen that disappears on click
+  - load button
+  - controls
+  - github
 
 color-scheme:
 https://color.adobe.com/Japanese-Modern-color-theme-87573/edit/?copy=true

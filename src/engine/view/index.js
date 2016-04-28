@@ -25,6 +25,10 @@ class View {
     $('#url-field').val('')
   }
 
+  closeLoadingScreen () {
+    $('#loading-screen').hide()
+  }
+
 }
 
 export default View

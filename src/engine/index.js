@@ -20,25 +20,27 @@ class Engine {
   }
 
   start () {
-    this.environment.addRingsToScene()
+    this.environment.addRingsToScene().then(() => {
+      this.view.closeLoadingScreen()
 
-    loop((t) => {
-      if (this.environment.newRingReady()) { this.environment.addRingToEnd() }
+      loop((t) => {
+        if (this.environment.newRingReady()) { this.environment.addRingToEnd() }
 
-      if (this.audioInterface.isRunning()) {
-        var frequencyData = this.audioInterface.getFrequencyData()
-        this.environment.updateRingWithFrequencyData(frequencyData)
-      }
+        if (this.audioInterface.isRunning()) {
+          var frequencyData = this.audioInterface.getFrequencyData()
+          this.environment.updateRingWithFrequencyData(frequencyData)
+        }
 
-      if (this.environment.controls) {
-        let coords = this.environment.getCoords()
-        this.view.updateCoordDisplay(coords)
-        let delta = this.clock.getDelta()
-        this.environment.controls.update(delta)
-      }
+        if (this.environment.controls) {
+          let coords = this.environment.getCoords()
+          this.view.updateCoordDisplay(coords)
+          let delta = this.clock.getDelta()
+          this.environment.controls.update(delta)
+        }
 
-      this.environment.render()
-    }).start()
+        this.environment.render()
+      }).start()
+    })
   }
 
   // 'private'
