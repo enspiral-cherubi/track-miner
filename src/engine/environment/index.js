@@ -1,15 +1,11 @@
 import THREE from 'three'
 import WindowResize from 'three-window-resize'
-import ThreeOrbitControls from 'three-orbit-controls'
-var OrbitControls = ThreeOrbitControls(THREE)
 import ThreeFlyControls from './tube-controls.js'
 var TubeControls = ThreeFlyControls(THREE)
 import PiecewiseRing from './piecewise-ring.js'
 import range from 'lodash.range'
-import $ from 'jquery'
 
 class Environment {
-
   constructor () {
     this.scene = new THREE.Scene()
     this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000)
@@ -32,7 +28,7 @@ class Environment {
     this.controls = null
   }
 
-  fetchCoords () {
+  getCoords () {
     var x = parseInt(this.controls.object.position.x)
     var y = parseInt(this.controls.object.position.y)
     var r = parseInt(Math.sqrt(Math.pow(x,2) + Math.pow(y,2)))
@@ -56,6 +52,9 @@ class Environment {
     })
   }
 
+  render () {
+    this.renderer.render(this.scene, this.camera)
+  }
 }
 
 export default Environment
