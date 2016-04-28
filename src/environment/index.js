@@ -7,14 +7,15 @@ var TubeControls = ThreeFlyControls(THREE)
 import PiecewiseRing from './piecewise-ring.js'
 import range from 'lodash.range'
 import $ from 'jquery'
+import SpectrumAnalyser from './spectrum-analyser.js'
 
 class Environment {
 
-  constructor (analyser) {
+  constructor () {
     this.scene = new THREE.Scene()
     this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000)
     this.renderer = new THREE.WebGLRenderer({alpha: true, canvas: document.getElementById('environment')})
-    this.analyser = analyser
+    this.analyser = new SpectrumAnalyser()
     var windowResize = new WindowResize(this.renderer, this.camera)
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     document.body.appendChild(this.renderer.domElement)
@@ -56,7 +57,7 @@ class Environment {
 
   addRingsToScene (num) {
     this.rings = range(num).map((z) => {
-      return new PiecewiseRing({ x0: 0, y0: 0, r: 400, numSegments: 51, z: z * 50})
+      return new PiecewiseRing({ x0: 0, y0: 0, r: 400, numSegments: 24, z: z * 50})
     })
     this.rings.forEach(this.addRingToScene.bind(this))
   }
