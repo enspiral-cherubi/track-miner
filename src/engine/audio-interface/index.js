@@ -5,7 +5,7 @@ import webAudioAnalyser2 from 'web-audio-analyser-2'
 class AudioInterface {
 
   constructor () {
-    this.audioCtx = new AudioContext()
+    this.audioCtx = new (window.AudioContext || window.webkitAudioContext)()
     this.gainNode = this.audioCtx.createGain()
     this.output = this.audioCtx.destination
     this.analyser = webAudioAnalyser2({ context: this.audioCtx, fftSize: 2048, addSubBassToBarkScale: true })

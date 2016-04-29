@@ -27,6 +27,23 @@ ul {
   list-style: none;
 }
 
+/* browser warning screen */
+
+#browser-warning-screen {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 2000;
+}
+
+#browser-warning-msg {
+  text-align: center;
+  font-size: 18px;
+  letter-spacing: 3px;
+}
+
 /* loading screen */
 
 #loading-screen {

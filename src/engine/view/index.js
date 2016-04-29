@@ -34,6 +34,10 @@ class View {
     $('#open-url-form-btn').show()
   }
 
+  showBrowserWarningScreen () {
+    $('#browser-warning-screen').show()
+  }
+
 }
 
 export default View

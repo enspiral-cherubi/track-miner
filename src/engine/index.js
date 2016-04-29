@@ -4,6 +4,7 @@ import Environment from './environment/index.js'
 import View from './view/index.js'
 import AudioInterface from './audio-interface/index.js'
 import loop from 'raf-loop'
+import bowser from 'bowser'
 
 class Engine {
   constructor () {
@@ -11,6 +12,12 @@ class Engine {
     this.environment = new Environment({ringCount: 50})
     this.view = new View()
     this.audioInterface = new AudioInterface()
+  }
+
+  checkBrowser () {
+    if (!(bowser.chrome || bowser.firefox)) {
+      this.view.showBrowserWarningScreen()
+    }
   }
 
   bindEventListeners () {
