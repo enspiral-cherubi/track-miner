@@ -12,3 +12,5 @@ CLIENT_ID=<YOUR_SOUNDCLOUD_CLIENT_ID> npm start
 ```
 
 visit `localhost:9966`
+
+![example](http://i.imgur.com/KniZR7Z.jpg)
