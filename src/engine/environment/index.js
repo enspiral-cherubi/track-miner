@@ -57,7 +57,7 @@ class Environment {
   addRingsToScene () {
     var promise = new Promise((resolve, reject) => {
       this.rings = range(this.opts.ringCount).map((z) => {
-        var ring = new PiecewiseRing({ x0: 0, y0: 0, r: 400, numSegments: 48, z: z * -50})
+        var ring = new PiecewiseRing({ x0: 0, y0: 0, r: 400, numSegments: 50, z: z * -50})
         ring.segments.forEach(segment => this.scene.add(segment))
         return ring
       })

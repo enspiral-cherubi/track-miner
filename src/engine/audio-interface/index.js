@@ -8,7 +8,7 @@ class AudioInterface {
     this.audioCtx = new AudioContext()
     this.gainNode = this.audioCtx.createGain()
     this.output = this.audioCtx.destination
-    this.analyser = webAudioAnalyser2({ context: this.audioCtx, fftSize: 2048 })
+    this.analyser = webAudioAnalyser2({ context: this.audioCtx, fftSize: 2048, addSubBassToBarkScale: true })
     this.scAudioInterface = new SoundcloudAudioInterface({ audioCtx: this.audioCtx, clientId: clientId })
     this.analyser.connect(this.gainNode)
     this.gainNode.connect(this.output)
